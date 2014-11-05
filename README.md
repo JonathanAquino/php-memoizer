@@ -11,7 +11,7 @@ caching. Then when you call $object->foo(), the result will be memoized.
 Example:
 
     class Foo {
-        use \Phoenix\Services\System\Memoize;
+        use Memoize;
         protected function memoizedBar($x) {
             var_dump('Running bar for ' . $x);
             return $x;
