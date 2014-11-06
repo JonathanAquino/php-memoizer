@@ -19,6 +19,11 @@ trait Memoize {
 
     /** @Override */
     public function __call($methodname, $args) {
+        array_walk_recursive($args, function($arg) {
+            if (is_object($arg)) {
+                throw new \Exception('Memoize does not support object arguments: ' . get_class($arg));
+            }
+        });
         $memoizedmethod = 'memoizedStatic' . $methodname;
         if (method_exists($this, $memoizedmethod)) {
             $key = $methodname . '-' . json_encode($args);
